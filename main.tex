@@ -1,0 +1,203 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Proposal: Learning Hash for Image Retrieval}
+
+\author{\IEEEauthorblockN{1\textsuperscript{st} Ba Cong Nguyen}
+\IEEEauthorblockA{\textit{Faculty of Information Technology} \\
+\textit{University of Science, VNU-HCM}\\
+Ho Chi Minh City, Vietnam \\
+nbcong22@clc.fitus.edu.vn}
+\and
+\IEEEauthorblockN{2\textsuperscript{nd} Tran Anh Khoa Dang}
+\IEEEauthorblockA{\textit{Faculty of Information Technology} \\
+\textit{University of Science, VNU-HCM}\\
+Ho Chi Minh City, Vietnam \\
+dtakhoa22@clc.fitus.edu.vn}
+% \and
+% \IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+}
+
+\maketitle
+
+\begin{abstract}
+The rapid growth of image datasets has made traditional image retrieval methods inefficient, 
+both in terms of accuracy and scalability. Hashing-based techniques provide a promising solution by 
+encoding high-dimensional image data into compact binary codes, enabling fast retrieval with minimal 
+storage requirements. This project focuses on designing a deep learning-based hashing framework to address 
+critical challenges such as semantic similarity preservation, hash code generation accuracy, 
+and computational efficiency. 
+By integrating advanced convolutional neural network (CNN) architectures and optimization strategies, 
+the proposed framework aims to generate high-quality binary hash codes that achieve superior performance 
+in both retrieval precision and scalability. The outcomes will have far-reaching implications in domains 
+such as e-commerce, digital libraries, and security.
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+
+\end{IEEEkeywords}
+
+\section{Research Motivation}
+
+Hashing is a cornerstone of efficient image retrieval due to its ability to encode high-dimensional image features 
+into compact binary representations. These binary hash codes allow for quick comparisons using Hamming distance, 
+making hashing an essential technique for real-time applications in areas like search engines, e-commerce, and digital 
+libraries.
+
+However, current approaches often fail to maximize the potential of hashing:
+\begin{itemize}
+    \item Many hashing methods inadequately preserve semantic relationships between images, leading to reduced precision.
+    \item Challenges in scalability limit the deployment of hashing techniques for massive datasets.
+    \item The dynamic nature of visual content demands adaptive and robust hashing methods.
+\end{itemize}
+
+Deep learning offers an unprecedented opportunity to revolutionize hashing by enabling end-to-end learning frameworks 
+where hash codes are directly optimized for retrieval tasks. This research seeks to push the boundaries of hashing 
+methods, blending computational efficiency with semantic richness.
+
+
+\section{Introduction}
+
+\subsection{Problem Statement}
+As image datasets grow in size and complexity, traditional image retrieval methods face several critical limitations. H
+ashing techniques offer a scalable solution by representing data through binary codes, enabling fast and efficient similarity searches. However, existing hashing methods for image retrieval are hindered by the following issues:
+
+\begin{enumerate}
+    \item Loss of Semantic Information: Current hashing algorithms often fail to preserve meaningful relationships between images in the binary code representation, resulting in inaccurate retrieval outcomes.
+    \item Quantization Errors: Transforming continuous feature representations into binary hash codes introduces significant quantization errors, reducing the overall quality of retrieval results.
+    \item Computational Overheads: Many existing approaches sacrifice retrieval speed for improved accuracy, making them unsuitable for real-time applications.
+    \item Inadequate Scalability: The effectiveness of hashing techniques diminishes as the size of the dataset increases, creating challenges for large-scale applications.
+    
+\end{enumerate}
+
+This research addresses these challenges by proposing a novel deep learning-based hashing framework that focuses on optimizing hash code generation for balanced accuracy, speed, and scalability.
+
+\subsection{Challenges and Constraints}
+
+While deep learning-based hashing offers promising advancements for image retrieval, there are several challenges and constraints associated with the proposed research:
+\begin{enumerate}
+    \item Semantic Preservation in Binary Codes:
+\begin{itemize}
+    \item     Challenge: Encoding high-dimensional image features into binary hash codes without losing meaningful semantic relationships is difficult. Quantization errors during the binarization process often degrade retrieval accuracy.
+    \item    Constraint: Developing an effective loss function that preserves semantic similarity across diverse datasets while maintaining computational efficiency.
+    
+\end{itemize}    
+    \item Trade-Off Between Efficiency and Accuracy:
+
+    \begin{itemize}
+        \item Challenge: Achieving high retrieval precision and recall typically comes at the cost of increased computational requirements. Balancing this trade-off is a key hurdle in designing the framework.
+        \item Constraint: Ensuring low latency for real-time applications while maintaining the quality of the retrieved results.
+    \end{itemize}
+
+    \item Scalability to Large Datasets:
+
+\begin{itemize}
+    \item     Challenge: Large-scale datasets, such as those with millions or billions of images, place significant demands on storage, indexing, and retrieval processes. Hashing methods may need further optimization to handle such scales efficiently.
+    \item     Constraint: Limited availability of computational resources or memory during experiments might restrict scalability testing to medium-sized datasets.
+    
+\end{itemize}    
+
+Dataset Diversity and Generalization:
+    \begin{itemize}
+        \item Challenge: The proposed hashing framework needs to generalize well across diverse datasets with varying image types and domains (e.g., medical images, fashion, or wildlife).
+        \item Constraint: Training and testing on publicly available datasets might not fully capture the challenges of real-world applications where dataset-specific characteristics prevail.
+    
+    \end{itemize}
+
+    \item Availability of Labeled Data:
+    Challenge: Supervised hashing methods require large volumes of labeled data to achieve semantic preservation, which might not always be readily available for all domains.
+    Constraint: Using semi-supervised or unsupervised learning methods to overcome the scarcity of labeled data may lead to compromises in retrieval performance.
+    Algorithmic Complexity:
+    Challenge: Advanced optimization strategies (e.g., quantization techniques or regularization) to improve hash code quality might increase the training complexity of the model.
+    Constraint: Ensuring the computational requirements for model training remain within practical limits to avoid excessive resource usage.
+    Evaluation Across Metrics:
+    Challenge: Image retrieval involves multiple performance metrics such as precision, recall, mean Average Precision (mAP), retrieval time, and Hamming distance. Excelling across all these metrics simultaneously is difficult.
+    Constraint: Trade-offs between certain evaluation metrics may limit the overall performance of the framework.
+    Benchmarking and Fair Comparison:
+    Challenge: Ensuring a fair comparison between the proposed framework and existing methods requires meticulous benchmarking on standardized datasets.
+    Constraint: Differences in experimental setups, such as dataset preprocessing or hardware configurations, could influence the benchmarking results.
+    Real-World Deployment Considerations:
+    Challenge: Adapting the proposed hashing framework for specific real-world applications (e.g., e-commerce or healthcare) may require additional domain-specific fine-tuning.
+    Constraint: Limited access to proprietary datasets or application-specific requirements could restrict the scope of real-world implementation.`
+    
+\end{enumerate}
+
+\section{Related Works}
+
+The field of image retrieval has seen significant advancements in hashing techniques. Some notable contributions include:
+
+\begin{enumerate}
+    \item Traditional Hashing Methods: Locality-Sensitive Hashing (LSH): A pioneering method for approximate nearest neighbor search, though it struggles with semantic preservation in complex datasets.
+    \item Deep Learning-Based Hashing:
+    \begin{itemize}
+        \item Deep Supervised Hashing (DSH): Leverages labeled data to train deep networks for generating semantic-aware hash codes. 
+        % https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Liu_Deep_Supervised_Hashing_CVPR_2016_paper.pdf?form=MG0AV3
+
+        \item HashNet: Proposes continuous optimization techniques to improve hash code generation quality. 
+        % https://arxiv.org/abs/1702.00758?form=MG0AV3
+
+        \item Unsupervised Deep Hashing: Focuses on learning hash codes from unlabeled data, addressing scalability challenges but often sacrificing retrieval precision.(link)
+        % https://github.com/liyunqianggyn/Deep-Unsupervised-Image-Hashing?form=MG0AV3
+        
+        
+    \end{itemize}
+    \item Binary Code Optimization Techniques:
+    \begin{itemize}
+        \item Methods such as soft binarization and adversarial training have been explored to improve the robustness and quality of hash codes.
+        \item Regularization techniques and novel loss functions have been proposed to enhance semantic preservation while minimizing computational overhead.
+        
+    \end{itemize}
+\end{enumerate}
+
+This research aims to build upon these foundations, introducing novel optimizations to the hashing process that address the limitations of existing methods.
+
+\section{Expected Outcomes}
+
+\begin{enumerate}
+    \item Development of a novel hashing-oriented deep learning framework optimized for image retrieval tasks.
+    \item High-quality binary hash codes that achieve a balance between semantic richness and compactness.
+    \item Scalability of the system to handle large datasets efficiently while maintaining high retrieval accuracy.
+    \item Comprehensive benchmarking results that position the proposed method as a leader in learning-based hashing for image retrieval.
+    
+\end{enumerate}
+\section*{Acknowledgment}
+
+\section*{References}
+\end{document}
