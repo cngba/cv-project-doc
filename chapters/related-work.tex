@@ -1,47 +1,34 @@
-\section{Related Works}
+\section{Related Work}
 
-The field of image retrieval has seen significant advancements in hashing techniques. Some notable contributions include:
+\textbf{Deep Supervised Hashing (DSH)}
 
-\textbf{Deep Supervised Hashing (DSH):}
+\textit{Approach}
 
-\textit{Training/Learning methodology:}
+The approach begins by designing a CNN model that processes image pairs alongside labels indicating whether the two images are similar or not, and outputs binary codes. To increase efficiency, image pairs are generated dynamically during training, enabling the utilization of a significantly larger number of pairs. The loss function is crafted to bring the outputs of similar image pairs closer together while pushing the outputs of dissimilar pairs further apart. This ensures that the resulting Hamming space effectively reflects the semantic structure of the images. Since optimizing directly in Hamming space is nondifferentiable, the network outputs are relaxed to continuous values during training. At the same time, a regularization term is introduced to drive the continuous outputs toward discrete binary values. Using this framework, images are encoded by passing them through the network, followed by converting the network's outputs into binary code representations via quantization.
 
-The training methodology initially considers the use of a Siamese structure for generating image pairs offline. However, this approach faces limitations: for n images, it would produce only n/2 valid pairs, and storing the image pairs would require significant storage space. To overcome these challenges, we propose generating image pairs online by utilizing all unique pairs within each mini-batch. During training, images are randomly sampled from the entire dataset in each iteration, ensuring that pairs across batches are effectively covered. This approach eliminates the need to store a complete pair-wise similarity matrix, making it highly scalable for large datasets.
+\textit{Image retrieval process within DSH}
 
-Additionally, training separate models from scratch for varying code lengths would be resource-intensive and inefficient. Instead, preceding layers of the network can be shared across models to save computational resources. However, as code length increases, the output layer grows in complexity with additional parameters, increasing the risk of overfitting. This necessitates careful design and training strategies to ensure performance and scalability.
-Feature Learning-based Deep Supervised Hashing with Pairwise Labels (A.k.a. deep pairwise-supervised hashing (DPSH)) \cite{Liu_2016_CVPR}
+During the training phase, the DSH model learns to map images into binary hash codes due to the CNN. The network is trained with pairs of images labeled as similar or dissimilar, ensuring that semantically similar images are mapped to similar binary codes. And when a query image is provided, it is passed through the CNN to generate its binary hash code. That code shall then be compared with other binary hash codes within the dataset(s). Calculating Hamming distance will provide the number of differing bits between the codes. After all the calculations, the image with hash codes that have the smallest Hamming distances to the query's hash code are retrieved as results.
 
-\textbf{Feature Learning-based Deep Supervised Hashing with Pairwise Labels}
+\textit{Training Methodology}
 
-\textit{Training/Learning methodology}
+Traditional Deep Supervised Hashing (DSH) methods often utilize a Siamese network structure for generating image pairs offline. However, this approach is constrained by storage limitations, as a dataset of $n$ images results in storing $n/2$ valid pairs. To improve scalability, modern methods generate image pairs dynamically within mini-batches, ensuring diverse pairs across iterations without requiring pre-stored similarity matrices. This enhances computational efficiency, making it viable for large-scale datasets. Additionally, reusing early network layers across different hash code lengths optimizes memory usage, but increasing code length adds model complexity, necessitating careful regularization to prevent overfitting.\cite{Liu_2016_CVPR}
 
-The training data consists of three key components: a labeled set of samples (initially small, known as the "seed"), a large pool of unlabeled samples, and a query set containing selected samples for which labels are obtained from an Oracle. Initially, only a small number of samples are labeled to start the active deep hashing process. In each cycle of active learning, the steps are as follows: (1) train the hashing model using pairs sampled from the labeled set; (2) identify and select the most informative samples from the unlabeled pool using a selection function and add these to the query set; and (3) request the Oracle to label the query samples and update the labeled set, the unlabeled pool, and the query set accordingly.
-The hash model generates binary codes by projecting the data through the network, with binary values assigned through a thresholding step (e.g., values may be set to either 0 or 1 based on their sign). Using a supervised hashing approach, a loss function is applied to train the model. The goal of the loss function is to minimize the distance in the binary code space for similar samples while maximizing the distance for dissimilar samples. This ensures that the semantic relationships among the data points are captured effectively in the learned binary codes.
-As directly optimizing binary codes is computationally difficult and non-differentiable, the process is relaxed by approximating the binary constraints with continuous values. The optimization process also balances multiple objectives, including pairwise supervision and reducing quantization error, through adjustable hyperparameters.
-To train the hash model, pairs of labeled samples are used to learn the binary codes effectively. This method can also be combined with semi-supervised techniques to further enhance performance, benefiting from the inclusion of both labeled and unlabeled data while leveraging active learning for supervision.
-\cite{li2016featurelearningbaseddeep}
+\textbf{Feature Learning-Based Deep Supervised Hashing with Pairwise Labels}
 
+\textit{Training Methodology}
+
+DPSH employs pairwise similarity labels to learn hash codes that align closely for semantically related images. The training set is composed of a small labeled subset (seed set), a large unlabeled pool, and a query set whose labels are dynamically acquired. Active learning is employed iteratively: (1) training on the labeled set, (2) selecting the most informative samples from the unlabeled pool, and (3) acquiring labels from an oracle. Hash codes are generated by projecting images through the network, where binarization is performed using thresholding. To optimize retrieval efficiency, a loss function enforces compactness for similar pairs and divergence for dissimilar ones. Due to the inherent difficulty in direct binary optimization, the model relaxes constraints using continuous approximations while balancing objectives like pairwise similarity and quantization error. Semi-supervised learning strategies further enhance performance by incorporating both labeled and unlabeled data.\cite{li2016featurelearningbaseddeep}
 
 \textbf{Deep Supervised Discrete Hashing (DSDH or DDSH)}
 
-The main contributions of this work are as follows:
+\textit{Core Contributions and Training Strategy}
 
-The last layer of the model is explicitly designed to output binary codes. These codes are optimized to preserve similarity relationships while ensuring consistency with label information. To the best of our knowledge, this is the first deep hashing framework that integrates both pairwise labels and classification information into a single-stream architecture for hash code learning.
- 
-To minimize quantization errors, we maintain the discrete properties of the hash codes throughout the optimization process. This is achieved using an alternating minimization strategy, where the objective function is optimized via the discrete cyclic coordinate descent method.
+DSDH explicitly optimizes the final layer of the model to output discrete binary hash codes, ensuring consistency with pairwise labels and class information. This marks one of the first attempts to integrate classification and pairwise similarity learning into a unified hashing framework. Quantization errors, a common challenge in hashing, are mitigated through an alternating minimization approach, employing discrete cyclic coordinate descent for efficient optimization.
 
-Comprehensive experiments demonstrate that our method surpasses existing state-of-the-art approaches on benchmark datasets for image retrieval, validating the effectiveness of the proposed framework.
+The binary hash learning process iteratively updates hash bits while ensuring similarity preservation. The $k$-th bit of each data point is optimized by minimizing an objective function that enforces binary constraints ($-1$ or $+1$ values). To address the non-differentiability of the sign function, activation functions like hyperbolic tangent provide smooth approximations, enabling gradient-based updates. The training alternates between optimizing hash codes and refining neural network parameters via backpropagation. Experiments demonstrate that DSDH surpasses prior approaches in retrieval efficiency, particularly in balancing discrete optimization with deep learning.\cite{10.5555/3294996.3295009}
 
-This approach highlights the innovative combination of end-to-end learning with discrete optimization to achieve high-performance hash code generation.
-
-\textit{Training/Learning methodology}
-	
-The k-th bit of all points in is determined by minimizing an objective function, with constraints ensuring that the bit values remain binary (either -1 or +1). The formulation includes terms for pairwise similarities and previously computed bits, ensuring optimal clustering for the binary hash codes.
-
-For the hash function , the non-differentiable nature of the sign function is addressed by relaxing it to a differentiable alternative, like the hyperbolic tangent. This adjustment enables the use of backpropagation for updating the neural network's parameters. The process involves sampling mini-batches, calculating gradients, and refining parameters iteratively. The overall learning algorithm for this discrete hashing model is summarized in an outlined step-by-step procedure.
-The algorithm adopts an alternating optimization strategy to iteratively refine both the hash codes and the neural network parameters. When optimizing the binary hash codes, each bit is updated individually by considering its impact on the overall objective function. This ensures that the resulting hash codes maintain their discrete binary nature while minimizing errors.
-For the neural network parameters, backpropagation is used to adjust the model based on the fixed binary codes. This involves computing gradients for all layers, with adjustments propagating backward to improve alignment between the network's outputs and the desired hash codes. The optimization alternates between updating the binary codes and fine-tuning the network, converging on a solution that balances both components effectively.
-\cite{10.5555/3294996.3295009}
+However, existing DSH models still face three key challenges: (1) semantic preservation—many methods struggle to retain fine-grained relationships between images; (2) scalability—computational costs remain high for large-scale datasets; and (3) robustness—hashing methods are sensitive to variations in image quality and distribution.
     % Traditional Hashing Methods: Locality-Sensitive Hashing (LSH): A pioneering method for approximate nearest neighbor search, though it struggles with semantic preservation in complex datasets.
 
 

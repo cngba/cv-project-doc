@@ -18,7 +18,7 @@
 \begin{document}
 
 
-\title{Proposal: A Comprehensive Survey on Learning Hash for Image Retrieval}
+\title{Proposal: Learning Hash for Image Retrieval}
 
 \author{\IEEEauthorblockN{1\textsuperscript{st} Ba Cong Nguyen}
 \IEEEauthorblockA{\textit{Faculty of Information Technology} \\
@@ -60,20 +60,9 @@ dtakhoa22@clc.fitus.edu.vn}
 \maketitle
 
 \begin{abstract}
-The rapid growth of image datasets has made traditional image retrieval methods inefficient, 
-both in terms of accuracy and scalability. Hashing-based techniques provide a promising solution by 
-encoding high-dimensional image data into compact binary codes, enabling fast retrieval with minimal 
-storage requirements. 
-In this paper, we introduce Deep Supervised Hashing, an advanced approach for retrieving images from large-scale datasets. 
-This method leverages deep learning to generate highly discriminative hash codes, 
-improving retrieval accuracy while maintaining computational efficiency.
- Although Deep Supervised Hashing has demonstrated its effectiveness in large-scale image search tasks, 
- there remains substantial room for further enhancement. Various factors, such as the optimization of hash 
- function learning, the handling of semantic relationships in image data, and the robustness of hash codes 
- against variations, present opportunities for improvement.
- To address these challenges, we explore several advancements in Deep Supervised Hashing methodologies.
- By analyzing existing techniques and identifying potential refinements, 
- we aim to contribute to the ongoing development of more accurate, efficient, and scalable image retrieval systems.
+    The rapid growth of image datasets has made traditional image retrieval methods inefficient in terms of accuracy and scalability. Hashing-based techniques address this by encoding high-dimensional image data into compact binary codes, enabling fast retrieval with minimal storage. However, Deep Supervised Hashing (DSH) methods often struggle with quantization loss and suboptimal similarity preservation.
+
+    This study explores a two-stage retrieval approach, where an initial fast search using hashing is followed by a refinement stage to improve ranking precision. We compare various DSH methods under this framework, analyzing their trade-offs between retrieval speed, accuracy, and computational efficiency. By standardizing evaluation metrics and testing across multiple datasets, we aim to provide clear insights into optimizing hashing-based image retrieval.
 
  \end{abstract}
 
@@ -91,28 +80,7 @@ hashing, image retrieval, deep learning
 
 % What are you going to do here? Tell the way you 
 % Train all 3 proposed models (list included) and conduct comparisons 
-  
-\section{Methodology}
-
-In this project, we aim to compare various deep learning based hashing models (or methods) in a multitude of aspects (such as training, runtime and general efficiency of resources) to hopefully find out the most effective model in general.
-The models will all be fed the same dataset and operated on the same device to ensure that the comparison is as impartial as possible, as different machines’ processing power and datasets certainly will make or break some parts of the algorithms.
-If our goal is to be accomplished, then there are certain steps to follow:
-\begin{enumerate}
-    \item Finding at least one suitable dataset to feed into the models. Some proposed datasets are MNIST digits dataset, MNIST Kuzushiji dataset and Cifar 10 dataset.
-    \item Implementing, evaluating and making inferences to assess each individual hashing model using Python (more specifically, Pytorch).
-    \item Draw conclusions based on the performance of each model using the datasets, while comparing certain aspects to see if any model exceeds or falls short in one key point or another.
-    
-\end{enumerate}
-
-\section{Expected Outcomes}
-
-\begin{enumerate}
-    \item Clear comparisons and analysis on various techniques.
-    \item High-quality binary hash codes that achieve a balance between semantic richness and compactness.
-    \item Scalability of the system to handle large datasets efficiently while maintaining high retrieval accuracy.
-    \item Comprehensive benchmarking results that position the proposed method as a leader in learning-based hashing for image retrieval.
-    
-\end{enumerate}
+\input{chapters/methodology.tex}
 \section*{Acknowledgment}
 
 

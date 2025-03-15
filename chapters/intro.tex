@@ -1,19 +1,18 @@
 \section{Introduction}
+Efficient image retrieval relies on encoding high-dimensional visual features into lower-dimensional representations while preserving semantic relationships.
+Hashing techniques have been widely adopted due to their ability to enable fast comparisons using Hamming distance. 
+However, challenges such as semantic loss during hashing and sensitivity to data distribution limit their real-world effectiveness.
 
+A two-stage retrieval approach can mitigate these issues by leveraging hashing for an initial fast search, followed by a refinement stage that improves ranking precision. This study explores:
 
-Hashing is a cornerstone of efficient image retrieval due to its ability to encode high-dimensional image features 
-into compact binary representations. These binary hash codes allow for quick comparisons using Hamming distance, 
-making hashing an essential technique for real-time applications. 
-
-However, current approaches often fail to maximize the potential of hashing. 
-Many hashing methods inadequately preserve semantic relationships between images, leading to reduced precision.
-Challenges in scalability limit the deployment of hashing techniques for massive datasets.
-The dynamic nature of visual content demands adaptive and robust hashing methods.
-
-Deep learning offers an unprecedented opportunity to revolutionize hashing by enabling end-to-end learning frameworks 
-where hash codes are directly optimized for retrieval tasks. This research seeks to push the boundaries of hashing 
-methods, blending computational efficiency with semantic richness.
-
+\begin{itemize}
+    \item 
+    The strengths and weaknesses of various DSH methods under this two-stage framework.
+    \item
+    The impact of different ranking refinement strategies on retrieval accuracy.
+    \item
+    A fair and standardized evaluation of these techniques across diverse datasets. 
+\end{itemize}
 
 \subsection{Problem Statement}
 
@@ -21,7 +20,7 @@ With the exponential growth of image datasets, traditional image retrieval metho
 
 Despite the advancements in hashing-based retrieval, existing methods, particularly Deep Supervised Hashing, still face challenges. These include suboptimal hash code learning, difficulty in preserving semantic similarities, sensitivity to noise and variations in images, and computational overhead during training. Furthermore, many current models lack the ability to generalize well across diverse datasets, limiting their applicability in real-world scenarios.
 
-Therefore, there is a need to explore and develop improved Deep Supervised Hashing techniques that enhance retrieval accuracy, efficiency, and robustness. This research aims to investigate potential improvements to hashing methodologies, addressing key limitations and contributing to the development of more effective large-scale image retrieval systems.
+Therefore, there is a need to explore and develop improved Deep Supervised Hashing techniques that enhance retrieval accuracy, efficiency, and robustness. 
 
 
 
