@@ -1,0 +1,24 @@
+#import "../preamble.typ": *
+// #bibliography("../biblio.bib")
+#context bib_state.get()
+
+= Related Work
+
+Efficient image retrieval has become an essential task in Computer Vision, 
+particularly for large-scale datasets like CIFAR-10. Traditional nearest neighbor search suffer from high computational cost, leading to the adoption of hashing techniques for approximate nearest neighbor retrieval. ANN methods facilitate faster search times by approximating the nearest neighbors, making them suitable for large-scale applications where exact searches are impractical. 
+
+Hashing-based methods have emerged as a prominent solution for ANN retrieval by mapping high-dimensional image features into compact binary codes. These binary representations enable rapid and memory-efficient similarity computations.
+Early hashing approaches such as Locality-Sensitive Hashing (LSH) #cite(<approx_nearest>) use random projections to preserve similarity, but they require long hash codes for accurate retrieval, which increase storage costs. Spectral Hashing (SH) #cite(<890d94598fa54dac85eae9aa824a0a7e>) and Iterative Quantization (ITQ) #cite(<6296665>) introduced data-dependent projections, improving code efficiency but still lacking supervised learning capabilities.
+
+To address the limitations of unsupervised hashing methods, Deep Supervised Hashing (DSH) techniques have been developed, integrating deep learning models to learn optimal hash codes from labeled data. A seminal work in this area is the Deep Supervised Hashing (DSH) method. #cite(<Liu_2016_CVPR>) In this approach, a convolutional neural network (CNN) is trained with pairs of images labeled as similar or dissimilar. The network is designed to produce binary-like outputs that preserve semantic similarities, effectively capturing complex image variations. The loss function encourages the network's outputs to approximate discrete binary values (e.g., $+1$ or $-1$), facilitating the generation of compact and discriminative hash codes. This method demonstrated significant improvements in retrieval performance on large-scale datasets. Methods such as Deep Pairwise Supervised Hashing (DPSH) #cite(<li_2016>) and HashNet #cite(<cao2017hashnetdeeplearninghash>) incorporate pairwise similarity or triplet-based loss functions to generate more discriminative binary codes. However, these approaches often require complex training strategies and large amount of labeled data.
+
+Recent work explores auto-encoder-based hashing, which utilizes deep auto-encoders to jointly learn feature representations and binary codes. Deep Supervised Auto-Encoder Hashing (SAEH) extends this approach by integrating supervised constraints within an auto-encoder framework, ensuring that the learned hash codes preserve semantic similarities while maintaining compactness and retrieval efficiency. This approach effectively balances reconstruction quality and hash discriminability.
+
+A critical challenge in hash-based retrieval is balancing speed and accuracy. To address this, two-stage retrieval approaches have been proposed. In the first stage, an initial hash-based search performs coarse candidate selection, rapidly narrowing down the search space. The second stage involves a more refined similarity ranking using deep feature embeddings. For example, methods like deep feature re-ranking #cite(<gordo2017endtoendlearningdeepvisual>) utilize deep neural networks to extract rich feature representations, which are then used to re-rank the initially retrieved candidates, enhancing retrieval precision. By implementing a two-stage retrieval pipeline that combines the efficiency of hashing with the precision of deep feature-based ranking, retrieval performance on datasets like CIFAR-10 can be significantly optimized.
+
+// == Deep Supervised Hashing (DSH)
+
+// === Approach
+
+// The approach begins by designing a CNN model that processes image pairs alongside labels indicating whether the two images are similar or not, and outputs binary codes. To increase efficiency, image pairs are generated dynamically during training, enabling the utilization of a significantly larger number of pairs. The loss function is crafted to bring the outputs of similar image pairs closer together while pushing the outputs of dissimilar pairs further apart. This ensures that the resulting Hamming space effectively reflects the semantic structure of the images. Since optimizing directly in Hamming space is nondifferentiable, the network outputs are relaxed to continuous values during training. At the same time, a regularization term is introduced to drive the continuous outputs toward discrete binary values. Using this framework, images are encoded by passing them through the network, followed by converting the network's outputs into binary code representations via quantization.
+#cite(<Liu_2016_CVPR>)

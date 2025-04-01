@@ -30,9 +30,10 @@
 )
 #bib_state.update(none)
 
-#include "./chapters/intro.typ"
+#include "./chapters/1-intro.typ"
 
-#include "./chapters/related-work.typ"
+#include "./chapters/2-related-work.typ"
 
-#include "./chapters/methodology.typ"
+#include "./chapters/3-methodology.typ"
 
+#include "./chapters/4-experiment.typ"
