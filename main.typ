@@ -1,34 +1,16 @@
-#import "/iclr2025.typ": iclr2025
-
-#let author-note = footnote[
-  Use footnote for providing further information about author (webpage,
-  Alternative address) --- *not* for acknowledging funding agencies.  Funding
-  Acknowledgements go at the end of the paper.
-]
-
-/**
- * Authors should be specified as a list of entries. Each entry enumerates
- * authors with the same affilation and address. Field `names` is mandatory.
- */
-#let authors = (
-  (
-    names: ([ Nguyen Ba Cong ], ),
-    affilation: [ 22127046 ],
-    email: "nbcong22@clc.fitus.edu.vn",
-  ),
-  (
-    names: ([ Dang Tran Anh Khoa  ], ),
-    affilation: [ 22127024 ],
-    email: "dtakhoa22@clc.fitus.edu.vn",
-  ),
-)
+#import "preamble.typ": *
 
 #show: iclr2025.with(
-  title: [Example Template],
+  title: [Deep Supervised Hashing for Image Retrieval],
   authors: authors,
   keywords: (),
   abstract: [
-    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+    // The rapid growth of image datasets has made traditional image retrieval methods inefficient in terms of accuracy and scalability. Hashing-based techniques address this by encoding high-dimensional image data into compact binary codes, enabling fast retrieval with minimal storage. However, Deep Supervised Hashing (DSH) methods often struggle with quantization loss and suboptimal similarity preservation.
+
+    // This study explores a two-stage retrieval approach, where an initial fast search using hashing is followed by a refinement stage to improve ranking precision. We compare various DSH methods under this framework, analyzing their trade-offs between retrieval speed, accuracy, and computational efficiency. By standardizing evaluation metrics and testing across multiple datasets, we aim to provide clear insights into optimizing hashing-based image retrieval.
+    This project presents Deep Supervised Hashing (DSH), a image retrieval method integrated by deep learning, enabling fast retrieval with minimal storage.
+    However, DSH may suffer from quantization loss and suboptimal similarity preservation. Therefore, this project integrates DSH with a two-stage retrieval approach, where an initial fast search using hashing is followed by a refinement stage to improve ranking precision.
+     
   ],
   bibliography: bibliography("biblio.bib"),
   appendix: [
@@ -46,12 +28,11 @@
 #outline(
     indent: auto,
 )
+#bib_state.update(none)
 
-#let url(uri) = link(uri, raw(uri))
+#include "./chapters/intro.typ"
 
-#import "chapters/intro.typ"
+#include "./chapters/related-work.typ"
 
-#import "chapters/related-work.typ"
-
-#import "chapters/methodology.typ"
+#include "./chapters/methodology.typ"
 

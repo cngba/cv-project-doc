@@ -31,7 +31,7 @@
 
  #let header-title = (
    [Under review as a conference paper at ICLR 2025],
-   [Edit left header here],  // accepted
+   [Deep Supervised Hashing for Image Retrieval],  // accepted
 )
 
 #let author-anon = [*Anonymous authors*\ Paper under double-blind review]
@@ -255,10 +255,7 @@
       line(length: 100%, stroke: 0.4pt)
     },
     footer-descent: 23.5pt, // Visually perfect.
-    footer: locate(loc => {
-      let ix = counter(page).at(loc).first()
-      return align(center, text(size: font-size.normal, [#ix]))
-    }),
+    numbering: "1",
   )
 
   set text(font: font-family, size: font-size.normal)
