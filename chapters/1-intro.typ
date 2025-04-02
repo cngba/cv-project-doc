@@ -39,4 +39,3 @@ Along the general retrieval system implemented with deep hashing, we propose a t
 - The strengths and weaknesses of various DSH methods under this two-stage framework.
 - The impact of different ranking refinement strategies on retrieval accuracy.
 - A fair and standardized evaluation of these techniques across diverse datasets.
-
